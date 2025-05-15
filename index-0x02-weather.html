@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>网球约球</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+            padding-bottom: 70px;
+        }
+        
+        .top-bar {
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .weather-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 5px;
+        }
+        
+        .weather-item {
+            min-width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .weather-item.active {
+            color: #07c160;
+        }
+        
+        .weather-day {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .weather-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+        
+        .weather-temp {
+            font-size: 12px;
+        }
+        
+        .main-content {
+            padding: 15px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .activity-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #ff6347;
+            font-size: 14px;
+        }
+        
+        .activity-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .activity-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .activity-price {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ff6347;
+            font-weight: bold;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .nav-item.active {
+            color: #07c160;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .create-btn {
+            background: #07c160;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -20px;
+            box-shadow: 0 2px 5px rgba(7, 193, 96, 0.3);
+        }
+        
+        @media (max-width: 480px) {
+            .activity-name {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="header">
+            <div class="title">网球约球</div>
+            <div class="date">2025-05-15</div>
+        </div>
+        
+        <div class="weather-scroll">
+            <div class="weather-item active">
+                <div class="weather-day">今天</div>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE4LjVDMTIuODMsMTguNSAxMy41LDE3LjgzIDEzLjUsMTdDMTMuNSwxNi4xNyAxMi44MywxNS41IDEyLDE1LjVDMTEuMTcsMTUuNSAxMC41LDE2LjE3IDEwLjUsMTdDMTAuNSwxNy44MyAxMS4xNywxOC41IDEyLDE4LjVNMjAsMTIuNUMyMCwxNC4xOCAxOC45LDE1LjUgMTcuNSwxNS41QzE2LjE1LDE1LjUgMTUsMTQuMTggMTUsMTIuNUMxNSwxMC44MiAxNi4xLDkuNSAxNy41LDkuNUMxOC44OSw5LjUgMjAsMTAuODIgMjAsMTIuNU0xNiwxMkMxNiwxMy42NiAxNC42NiwxNSAxMywxNUMxMS4zNCwxNSAxMCwxMy42NiAxMCwxMkMxMCwxMC4zNCAxMS4zNCw5IDEzLDlDMTQuNjYsOSAxNiwxMC4zNCAxNiwxMk0xOSwxMkMxOSw4LjEzIDE1Ljg3LDUgMTIsNUM4LjEzLDUgNSw4LjEzIDUsMTJDNSwxNS44NyA4LjEzLDE5IDEyLDE5QzE1Ljg3LDE5IDE5LDE5Ljg3IDE5LDEyTTEyLDMuNUMxMi4yOCwzLjUgMTIuNSwzLjcyIDEyLjUsNFY2LjVDMTIuNSw2Ljc4IDEyLjI4LDcgMTIsN0MxMS43Miw3IDExLjUsNi43OCAxMS41LDYuNVY0QzExLjUsMy43MiAxMS43MiwzLjUgMTIsMy41TTE3LjUsMTBDMTcuMjIsMTAgMTcsMTAuMjIgMTcsMTAuNVYxMkMxNywxMi4yOCAxNy4yMiwxMi41IDE3LjUsMTIuNUMxNy43OCwxMi41IDE4LDEyLjI4IDE4LDEyVjEwLjVDMTgsMTAuMjIgMTcuNzgsMTAgMTcuNSwxME0xNy41LDYuNUMxNy43OCw2LjUgMTgsNi4yOCAxOCw2VjQuNUMxOCw0LjIyIDE3Ljc4LDQgMTcuNSw0QzE3LjIyLDQgMTcsNC4yMiAxNyw0LjVWNkMxNyw2LjI4IDE3LjIyLDYuNSAxNy41LDYuNU02LjUsMTBDNi4yMiwxMCA2LDEwLjIyIDYsMTAuNVYxMkM2LDEyLjI4IDYuMjIsMTIuNSA2LjUsMTIuNUM2Ljc4LDEyLjUgNywxMi4yOCA3LDEyVjEwLjVDNywxMC4yMiA2Ljc4LDEwIDYuNSwxME02LjUsNi41QzYuNzgsNi41IDcsNi4yOCA3LDZWNC41QzcsNC4yMiA2Ljc4LDQgNi41LDRDNi4yMiw0IDYsNC4yMiA2LDQuNVY2QzYsNi4yOCA2LjIyLDYuNSA2LjUsNi41WiIgZmlsbD0iIzA3YzE2MCIvPjwvc3ZnPg==" class="weather-icon" alt="晴">
+                <div class="weather-temp">25°C</div>
+            </div>
+            
+            <div class="weather-item">
+                <div class="weather-day">明天</div>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE4LjVDMTIuODMsMTguNSAxMy41LDE3LjgzIDEzLjUsMTdDMTMuNSwxNi4xNyAxMi44MywxNS41IDEyLDE1LjVDMTEuMTcsMTUuNSAxMC41LDE2LjE3IDEwLjUsMTdDMTAuNSwxNy44MyAxMS4xNywxOC41IDEyLDE4LjVNMjAsMTIuNUMyMCwxNC4xOCAxOC45LDE1LjUgMTcuNSwxNS41QzE2LjE1LDE1LjUgMTUsMTQuMTggMTUsMTIuNUMxNSwxMC44MiAxNi4xLDkuNSAxNy41LDkuNUMxOC44OSw5LjUgMjAsMTAuODIgMjAsMTIuNU0xNiwxMkMxNiwxMy42NiAxNC42NiwxNSAxMywxNUMxMS4zNCwxNSAxMCwxMy42NiAxMCwxMkMxMCwxMC4zNCAxMS4zNCw5IDEzLDlDMTQuNjYsOSAxNiwxMC4zNCAxNiwxMk0xOSwxMkMxOSw4LjEzIDE1Ljg3LDUgMTIsNUM4LjEzLDUgNSw4LjEzIDUsMTJDNSwxNS44NyA8LjEzLDE5IDEyLDE5QzE1Ljg3LDE5IDE5LDE1Ljg3IDE5LDEyTTEyLDMuNUMxMi4yOCwzLjUgMTIuNSwzLjcyIDEyLjUsNFY2LjVDMTIuNSw2Ljc4IDEyLjI4LDcgMTIsN0MxMS43Miw3IDExLjUsNi43OCAxMS41LDYuNVY0QzExLjUsMy43MiAxMS43MiwzLjUgMTIsMy41TTE3LjUsMTBDMTcuMjIsMTAgMTcsMTAuMjIgMTcsMTAuNVYxMkMxNywxMi4yOCAxNy4yMiwxMi41IDE3LjUsMTIuNUMxNy43OCwxMi41IDE4LDEyLjI4IDE4LDEyVjEwLjVDMTgsMTAuMjIgMTcuNzgsMTAgMTcuNSwxME0xNy41LDYuNUMxNy43OCw2LjUgMTgsNi4yOCAxOCw2VjQuNUMxOCw0LjIyIDE3Ljc4LDQgMTcuNSw0QzE3LjIyLDQgMTcsNC4yMiAxNyw0LjVWNkMxNyw2LjI4IDE3LjIyLDYuNSAxNy41LDYuNU02LjUsMTBDNi4yMiwxMCA2LDEwLjIyIDYsMTAuNVYxMkM2LDEyLjI4IDYuMjIsMTIuNSA2LjUsMTIuNUM2Ljc4LDEyLjUgNywxMi4yOCA3LDEyVjEwLjVDNywxMC4yMiA6Ljc4LDEwIDYuNSwxME02LjUsNi41QzYuNzgsNi41IDcsNi4yOCA3LDZWNC41QzcsNC4yMiA2Ljc4LDQgNi41LDRDNi4yMiw0IDYsNC4yMiA2LDQuNVY2QzYsNi4yOCA2LjIyLDYuNSA2LjUsNi41WiIgZmlsbD0iIzA3YzE2MCIvPjwvc3ZnPg==" class="weather-icon" alt="晴">
+                <div class="weather-temp">26°C</div>
+            </div>
+            
+            <div class="weather-item">
+                <div class="weather-day">周六</div>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE4LjVDMTIuODMsMTguNSAxMy41LDE3LjgzIDEzLjUsMTdDMTMuNSwxNi4xNyAxMi44MywxNS41IDEyLDE1LjVDMTEuMTcsMTUuNSAxMC41LDE2LjE3IDEwLjUsMTdDMTAuNSwxNy44MyAxMS4xNywxOC41IDEyLDE4LjVNMjAsMTIuNUMyMCwxNC4xOCAxOC45LDE1LjUgMTcuNSwxNS41QzE2LjE1LDE1LjUgMTUsMTQuMTggMTUsMTIuNUMxNSwxMC44MiAxNi4xLDkuNSAxNy41LDkuNUMxOC44OSw5LjUgMjAsMTAuODIgMjAsMTIuNU0xNiwxMkMxNiwxMy42NiAxNC42NiwxNSAxMywxNUMxMS4zNCwxNSAxMCwxMy42NiAxMCwxMkMxMCwxMC4zNCAxMS4zNCw5IDEzLDlDMTQuNjYsOSAxNiwxMC4zNCAxNiwxMk0xOSwxMkMxOSw4LjEzIDE1Ljg3LDUgMTIsNUM4LjEzLDUgNSw4LjEzIDUsMTJDNSwxNS44NyA4LjEzLDE5IDEyLDE5QzE1Ljg3LDE5IDE5LDE1Ljg3IDE5LDEyTTEyLDMuNUMxMi4yOCwzLjUgMTIuNSwzLjcyIDEyLjUsNFY6LjVDMTIuNSw2Ljc4IDEyLjI4LDcgMTIsN0MxMS43Miw3IDExLjUsNi43OCAxMS41LDYuNVY0QzExLjUsMy43MiAxMS43MiwzLjUgMTIsMy41TTE3LjUsMTBDMTcuMjIsMTAgMTcsMTAuMjIgMTcsMTAuNVYxMkMxNywxMi4yOCAxNy4yMiwxMi41IDE3LjUsMTIuNUMxNy43OCwxMi41IDE4LDEyLjI4IDE4LDEyVjEwLjVDMTgsMTAuMjIgMTcuNzgsMTAgMTcuNSwxME0xNy41LDYuNUMxNy43OCw2LjUgMTgsNi4yOCAxOCw2VjQuNUMxOCw0LjIyIDE3Ljc4LDQgMTcuNSw0QzE3LjIyLDQgMTcsNC4yMiAxNyw0LjVWNkMxNyw2LjI4IDE3LjIyLDYuNSAxNy41LDYuNU02LjUsMTBDNi4yMiwxMCA2LDEwLjIyIDYsMTAuNVYxMkM2LDEyLjI4IDYuMjIsMTIuNSA2LjUsMTIuNUM2Ljc4LDEyLjUgNywx2LjI4IDcsMTJWMTAuNUM3LDEwLjIyIDYuNzgsMTAgNi41LDEwTTYuNSw2LjVDNi43OCw2LjUgNyw2LjI4IDcsNlY0LjVDNyw0LjIyIDYuNzgsNCA2LjUsNEM2LjIyLDQgNiw0LjIyIDYsNC41VjZDNiw2LjI4IDYuMjIsNi41IDYuNSw2LjVaIiBmaWxsPSIjMDdjMTYwIi8+PC9zdmc+" class="weather-icon" alt="晴">
+                <div class="weather-temp">24°C</div>
+            </div>
+            
+            <div class="weather-item">
+                <div class="weather-day">周日</div>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD

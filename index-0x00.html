@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>网球约球</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .tab-bar {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .tab.active {
+            color: #07c160;
+            border-bottom: 2px solid #07c160;
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .activity-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #ff6347;
+            font-size: 14px;
+        }
+        
+        .activity-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .activity-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .activity-price {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #ff6347;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .tab {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">网球约球</div>
+        <div class="date">2025-05-15</div>
+    </div>
+    
+    <div class="tab-bar">
+        <div class="tab active">发现</div>
+        <div class="tab">我的</div>
+    </div>
+    
+    <div class="section-title">热门约球畅打活动</div>
+    
+    <div class="activity-list">
+        <div class="activity-item">
+            <div class="status">报名中</div>
+            <div class="activity-name">网球陪练4.0</div>
+            <div class="activity-info">
+                <div>5月15日 07:00-23:22</div>
+                <div>静安寺 距您1km</div>
+                <div>已报名3人 | 差2人</div>
+            </div>
+            <div class="activity-price">￥120.00</div>
+        </div>
+        
+        <div class="activity-item">
+            <div class="status">报名中</div>
+            <div class="activity-name">跃网·Rising大华室内网球畅打活动</div>
+            <div class="activity-info">
+                <div>5月15日 10:00-19:00</div>
+                <div>大华 距您3.1km</div>
+                <div>已报名5人 | 差3人</div>
+            </div>
+            <div class="activity-price">￥150.00</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 切换标签页
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // 这里可以添加更多交互逻辑
+            console.log('网球约球小程序已加载');
+        });
+    </script>
+</body>
+</html>
+<code_end>
+这是一个完整的移动端网球约球页面，包含HTML结构、CSS样式和基础JavaScript交互。页面适配移动设备，展示了约球活动列表，支持标签页切换功能。s

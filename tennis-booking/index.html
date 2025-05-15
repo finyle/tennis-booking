@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>网球约球</title>
+    <style>
+        /* 通用样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+        .hidden { display: none !important; }
+        /* 首页样式 */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        .weather-icon {
+            width: 20px;
+            height: 20px;
+        }
+        .main-content {
+            padding: 15px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .activity-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        .status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #ff6347;
+            font-size: 14px;
+        }
+        .activity-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .activity-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        .activity-price {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ff6347;
+            font-weight: bold;
+        }
+        /* 创建约球样式 */
+        .create-container {
+            width: 90%;
+            margin: 20px auto 80px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .create-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .create-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input, .input-group select, .input-group button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-group input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .note {
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .agreement {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #333;
+        }
+        /* 个人主页样式 */
+        .profile-container {
+            padding-bottom: 60px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.3);
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        .user-text h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .user-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .quick-actions {
+            display: flex;
+            background-color: white;
+            padding: 15px 0;
+            margin-bottom: 10px;
+        }
+        .action-item {
+            flex: 1;
+            text-align: center;
+        }
+        .action-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+        .action-text {
+            font-size: 13px;
+            color: #666;
+        }
+        .service-section {
+            background-color: white;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .service-section .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .service-list {
+            list-style: none;
+        }
+        .service-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        .service-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+        }
+        .service-name {
+            flex: 1;
+            font-size: 15px;
+        }
+        .arrow-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+        .version-info {
+            text-align: center;
+            padding: 20px 0;
+            color: #999;
+            font-size: 13px;
+        }
+        /* 底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+        }
+        .nav-item.active {
+            color: #07c160;
+        }
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+        .create-btn {
+            background: #07c160;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -20px;
+            box-shadow: 0 2px 5px rgba(7, 193, 96, 0.3);
+            font-size: 28px;
+        }
+        @media (max-width: 480px) {
+            .activity-name { font-size: 15px; }
+            .create-container { width: 98%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 首页 -->
+    <div id="page-index">
+        <div class="top-bar">
+            <div class="title">网球约球</div>
+            <div class="weather-info">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE4LjVDMTIuODMsMTguNSAxMy41LDE3LjgzIDEzLjUsMTdDMTMuNSwxNi4xNyAxMi44MywxNS41IDEyLDE1LjVDMTEuMTcsMTUuNSAxMC41LDE2LjE3IDEwLjUsMTdDMTAuNSwxNy44MyAxMS4xNywxOC41IDEyLDE4LjVNMjAsMTIuNUMyMCwxNC4xOCAxOC45LDE1LjUgMTcuNSwxNS41QzE2LjE1LDE1LjUgMTUsMTQuMTggMTUsMTIuNUMxNSwxMC44MiAxNi4xLDkuNSAxNy41LDkuNUMxOC44OSw5LjUgMjAsMTAuODIgMjAsMTIuNU0xNiwxMkMxNiwxMy42NiAxNC42NiwxNSAxMywxNUMxMS4zNCwxNSAxMCwxMy42NiAxMCwxMkMxMCwxMC4zNCAxMS4zNCw5IDEzLDlDMTQuNjYsOSAxNiwxMC4zNCAxNiwxMk0xOSwxMkMxOSw4LjEzIDE1Ljg3LDUgMTIsNUM4LjEzLDUgNSw4LjEzIDUsMTJDNSwxNS44NyA4LjEzLDE5IDEyLDE5QzE1Ljg3LDE5IDE5LDE1Ljg3IDE5LDEyTTEyLDMuNUMxMi4yOCwzLjUgMTIuNSwzLjcyIDEyLjUsNFY2LjVDMTIuNSw2Ljc4IDEyLjI4LDcgMTIsN0MxMS43Miw3IDExLjUsNi43OCAxMS41LDYuNVY0QzExLjUsMy43MiAxMS43MiwzLjUgMTIsMy41TTE3LjUsMTBDMTcuMjIsMTAgMTcsMTAuMjIgMTcsMTAuNVYxMkMxNywxMi4yOCAxNy4yMiwxMi41IDE3LjUsMTIuNUMxNy43OCwxMi41IDE4LDEyLjI4IDE4LDEyVjEwLjVDMTgsMTAuMjIgMTcuNzgsMTAgMTcuNSwxME0xNy41LDYuNUMxNy43OCw2LjUgMTgsNi4yOCAxOCw2VjQuNUMxOCw0LjIyIDE3Ljc4LDQgMTcuNSw0QzE3LjIyLDQgMTcsNC4yMiAxNyw0LjVWNkMxNyw2LjI4IDE3LjIyLDYuNSAxNy41LDYuNU02LjUsMTBDNi4yMiwxMCA2LDEwLjIyIDYsMTAuNVYxMkM2LDEyLjI4IDYuMjIsMTIuNSA2LjUsMTIuNUM2Ljc4LDEyLjUgNywxMi4yOCA3LDEyVjEwLjVDNywxMC4yMiA2Ljc4LDEwIDYuNSwxME02LjUsNi41QzYuNzgsNi41IDcsNi4yOCA3LDZWNC41QzcsNC4yMiA2Ljc4LDQgNi41LDRDNi4yMiw0IDYsNC4yMiA2LDQuNVY2QzYsNi4yOCA2LjIyLDYuNSA2LjUsNi41WiIgZmlsbD0iIzA3YzE2MCIvPjwvc3ZnPg==" class="weather-icon" alt="天气">
+                <span>晴 25°C</span>
+            </div>
+            <div class="date" id="index-date"></div>
+        </div>
+        <div class="main-content">
+            <div class="section-title">热门约球畅打活动</div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="status">报名中</div>
+                    <div class="activity-name">网球陪练4.0</div>
+                    <div class="activity-info">
+                        <div>5月15日 07:00-23:22</div>
+                        <div>静安寺 距您1km</div>
+                        <div>已报名3人 | 差2人</div>
+                    </div>
+                    <div class="activity-price">￥120.00</div>
+                </div>
+                <div class="activity-item">
+                    <div class="status">报名中</div>
+                    <div class="activity-name">跃网·Rising大华室内网球畅打活动</div>
+                    <div class="activity-info">
+                        <div>5月15日 10:00-19:00</div>
+                        <div>大华 距您3.1km</div>
+                        <div>已报名5人 | 差3人</div>
+                    </div>
+                    <div class="activity-price">￥150.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 创建约球 -->
+    <div id="page-create" class="hidden">
+        <div class="create-container">
+            <div class="create-header">
+                <h1>发起约球</h1>
+            </div>
+            <div class="input-group">
+                <label for="activityTitle">请在这里输入活动标题</label>
+                <input type="text" id="activityTitle" placeholder="请输入活动标题">
+            </div>
+            <div class="input-group">
+                <label for="meetingPlace">选择集合地点</label>
+                <input type="text" id="meetingPlace" placeholder="请输入集合地点">
+            </div>
+            <div class="input-group">
+                <label for="activityTime">选择活动时间</label>
+                <input type="datetime-local" id="activityTime" placeholder="请选择活动时间">
+            </div>
+            <div class="input-group">
+                <label>招募人数</label>
+                <input type="number" id="recruitNumber" min="1" placeholder=" ~ ">
+                <span>人</span>
+            </div>
+            <div class="input-group">
+                <label>发起方人数</label>
+                <input type="number" id="organizerNumber" value="1" readonly>
+                <span>人</span>
+            </div>
+            <div class="input-group">
+                <label for="activityPrice">活动价格</label>
+                <input type="number" id="activityPrice" step=".01" placeholder="请填写每人多少钱">
+                <span>元/人</span>
+            </div>
+            <div class="input-group">
+                <label for="levelRequirement">级别要求</label>
+                <select id="levelRequirement">
+                    <option value="不限">不限</option>
+                    <option value="初级">初级</option>
+                    <option value="中级">中级</option>
+                    <option value="高级">高级</option>
+                </select>
+            </div>
+            <div class="note">
+                注意：开始前4小时未达到最低人数，活动自动取消；约球结束2天后，报名费自动转入[钱包-余额]中。
+            </div>
+            <button class="submit-btn" onclick="confirmAndSubmit()">确定发布</button>
+            <div class="agreement">
+                点击确定发布按钮，即表示已阅读并同意《约球规则》
+            </div>
+        </div>
+    </div>
+    <!-- 个人主页 -->
+    <div id="page-profile" class="hidden">
+        <div class="profile-container">
+            <div class="user-info">
+                <img src="https://placeholder.com/150" alt="用户头像" class="avatar">
+                <div class="user-text">
+                    <h2>林克</h2>
+                    <p>已在韵动吧2天</p>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <div class="action-item">
+                    <img src="https://via.placeholder.com/30" alt="报名" class="action-icon">
+                    <div class="action-text">我的报名</div>
+                </div>
+                <div class="action-item">
+                    <img src="https://via.placeholder.com/30" alt="约球" class="action-icon">
+                    <div class="action-text">我的约球</div>
+                </div>
+            </div>
+            <div class="service-section">
+                <div class="section-title">更多服务</div>
+                <ul class="service-list">
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="球友印象" class="service-icon">
+                        <span class="service-name">球友印象</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="我的关注" class="service-icon">
+                        <span class="service-name">我的关注</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="约球协议" class="service-icon">
+                        <span class="service-name">约球协议</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="约球余额" class="service-icon">
+                        <span class="service-name">约球余额</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="我的AI录像" class="service-icon">
+                        <span class="service-name">我的AI录像</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="场馆收藏" class="service-icon">
+                        <span class="service-name">场馆收藏</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                    <li class="service-item">
+                        <img src="https://via.placeholder.com/24" alt="我的行程" class="service-icon">
+                        <span class="service-name">我的行程</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                    </li>
+                </ul>
+            </div>
+            <div class="version-info">
+                韵动 v2.7.3
+            </div>
+        </div>
+    </div>
+    <!-- 底部导航栏 -->
+    <div class="bottom-nav">
+        <div class="nav-item active" data-page="index">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDEwLjlDMTMuMTYsMTAuOSAxNC4xLDkuOTYgMTQuMSw4LjhDMTQuMSw3LjY0IDEzLjE2LDYuNyAxMiw2LjdDMTAuODQsNi43IDkuOSw3LjY0IDkuOSw4LjhDOS45LDkuOTYgMTAuODQsMTAuOSAxMiwxMC45TTEyLDEyLjlDOS4xMSwxMi45IDYuNywxMC40OSA2LjcsNy42QzYuNyw0LjcxIDkuMTEsMi4zIDEyLDIuM0MxNC44OSwyLjMgMTcuMyw0LjcxIDE3LjMsNy42QzE3LjMsMTAuNDkgMTQuODksMTIuOSAxMiwxMi45TTEyLDQuM0MxMC4wNiw0LjMgOC41LDUuODYgOC41LDcuOEM4LjUsOS43NCAxMC4wNiwxMS4zIDEyLDExLjNDMTMuOTQsMTEuMyAxNS41LDkuNzQgMTUuNSw3LjhDMTUuNSw1Ljg2IDEzLjk0LDQuMyAxMiw0LjNNMTIsMTMuOUM5LjY3LDEzLjkgNy43NSwxNS44MiA3Ljc1LDE4LjFWNy42QzcuNzUsNS4yOCA5LjY3LDMuMzYgMTIsMy4zNkMxNC4zMywzLjM2IDE2LjI1LDUuMjggMTYuMjUsNy42VjE4LjFDMTYuMjUsMTUuODIgMTQuMzMsMTMuOSAxMiwxMy45TTEyLDE1LjRDMTMuNTksMTUuNCAxNC44NSwxNi42NiAxNC44NSwxOC4yVjE5LjVDMTQuODUsMjAuMzMgMTQuMTgsMjEgMTMuMzUsMjFIMTAuNjVDOS44MiwyMSA5LjE1LDIwLjMzIDkuMTUsMTkuNVYxOC4yQzkuMTUsMTYuNjYgMTAuNDEsMTUuNCAxMiwxNS40TTEyLDE2LjlDMTEuMTcsMTYuOSAxMC41LDE3LjU3IDEwLjUsMTguNFYxOS41QzEwLjUsMTkuNzggMTAuNzIsMjAgMTEsMjBIMTMuMUMxMy4zOCwyMCAxMy42LDE5Ljc4IDEzLjYsMTkuNVYxOC40QzEzLjYsMTcuNTcgMTIuODMsMTYuOSAxMiwxNi45TTEyLDYuN0MxMC44NCw2LjcgOS45LDcuNjQgOS45LDguOEM5LjksOS45NiAxMC44NCwxMC45IDEyLDEwLjlDMTMuMTYsMTAuOSAxNC4xLDkuOTYgMTQuMSw4LjhDMTQuMSw3LjY0IDEzLjE2LDYuNyAxMiw2LjdNMTIsMTIuOUM5LjExLDEyLjkgNi43LDEwLjQ5IDYuNyw3LjZDNi43LDQuNzEgOS4xMSwyLjMgMTIsMi4zQzE0Ljg5LDIuMyAxNy4zLDQuNzEgMTcuMyw3LjZDMTcuMywxMC40OSAxNC44OSwxMi45IDEyLDEyLjk=" class="nav-icon" alt="发现">
+            <span>发现</span>
+        </div>
+        <div class="nav-item create-btn" data-page="create">
+            <span>+</span>
+        </div>
+        <div class="nav-item" data-page="profile">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDJDMTcuNTMsMiAyMiw2LjQ3IDIyLDEyQzIyLDE3LjUzIDE3LjUzLDIyIDEyLDIyQzYuNDcsMjIgMiwxNy41MyAyLDEyQzIsNi40NyA2LjQ3LDIgMTIsMk0xMiw0QzcuNTgsNCA0LDcuNTggNCwxMkM0LDE2LjQyIDcuNTgsMjAgMTIsMjBDMTYuNDIsMjAgMjAsMTYuNDIgMjAsMTJDMjAsNy41OCAxNi40Miw0IDEyLDRNMTIsNkMxNC4yMSw2IDE2LDcuNzkgMTYsMTAxNiwwLjIxIDE0LjIxLDEyLDE0QzEwLjk3LDE0IDksMTIuMjEgOSwxMEM5LDcuNzkgMTAuNzksNiAxMiw2TTEyLDhDMTAuOSw4IDEwLDguOSAxMCwxMEMxMCwxMS4xIDEwLjksMTIgMTIsMTJDMTMuMSwxMiAxNCwxMS4xIDE0LDEwQzE0LDguOSAxMy4xLDggMTIsOE0xMiwxNkMxNC42NywxNiAxOC4xLDE3LjM0IDE5LjIsMTkuNUg0LjhDNS45LDE3LjM0IDkuMzMsMTYgMTIsMTZNMTIsMTRDOS4zMywxNCA2LDE1LjM0IDQuOCwxNy41SDE5LjJDMTgsMTUuMzQgMTQuNjcsMTQgMTIsMTRaIiBmaWxsPSIjNjY2Ii8+PC9zdmc+" class="nav-icon" alt="我的">
+            <span>我的</span>
+        </div>
+    </div>
+    <script>
+        // 页面切换逻辑
+        function showPage(page) {
+            document.getElementById('page-index').classList.toggle('hidden', page !== 'index');
+            document.getElementById('page-create').classList.toggle('hidden', page !== 'create');
+            document.getElementById('page-profile').classList.toggle('hidden', page !== 'profile');
+            // 导航栏高亮
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if(item.dataset.page === page) {
+                    item.classList.add('active');
+                } else if(item.classList.contains('create-btn') && page === 'create') {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        // 底部导航栏事件
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.dataset.page;
+                if(page) showPage(page);
+            });
+        });
+        // 默认首页
+        showPage('index');
+        // 首页日期
+        document.getElementById('index-date').textContent = new Date().toISOString().slice(0,10);
+        // 创建约球表单提交
+        function confirmAndSubmit() {
+            alert('活动已发布！（模拟）');
+            showPage('index');
+        }
+    </script>
+</body>
+</html>

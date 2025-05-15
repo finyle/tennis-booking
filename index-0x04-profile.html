@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我的 - 韵动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .container {
+            padding-bottom: 60px;
+        }
+        
+        /* 顶部用户信息 */
+        .user-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.3);
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .user-text h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .user-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* 快速入口 */
+        .quick-actions {
+            display: flex;
+            background-color: white;
+            padding: 15px 0;
+            margin-bottom: 10px;
+        }
+        
+        .action-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .action-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+        
+        .action-text {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* 服务列表 */
+        .service-section {
+            background-color: white;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        
+        .service-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+        }
+        
+        .service-name {
+            flex: 1;
+            font-size: 15px;
+        }
+        
+        .arrow-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+        
+        /* 版本信息 */
+        .version-info {
+            text-align: center;
+            padding: 20px 0;
+            color: #999;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 用户信息区域 -->
+        <div class="user-info">
+            <img src="https://placeholder.com/150" alt="用户头像" class="avatar">
+            <div class="user-text">
+                <h2>林克</h2>
+                <p>已在韵动吧2天</p>
+            </div>
+        </div>
+        
+        <!-- 快速入口 -->
+        <div class="quick-actions">
+            <div class="action-item">
+                <img src="https://via.placeholder.com/30" alt="报名" class="action-icon">
+                <div class="action-text">我的报名</div>
+            </div>
+            <div class="action-item">
+                <img src="https://via.placeholder.com/30" alt="约球" class="action-icon">
+                <div class="action-text">我的约球</div>
+            </div>
+        </div>
+        
+        <!-- 服务列表 -->
+        <div class="service-section">
+            <div class="section-title">更多服务</div>
+            <ul class="service-list">
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="球友印象" class="service-icon">
+                    <span class="service-name">球友印象</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="我的关注" class="service-icon">
+                    <span class="service-name">我的关注</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="约球协议" class="service-icon">
+                    <span class="service-name">约球协议</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="约球余额" class="service-icon">
+                    <span class="service-name">约球余额</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="我的AI录像" class="service-icon">
+                    <span class="service-name">我的AI录像</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="场馆收藏" class="service-icon">
+                    <span class="service-name">场馆收藏</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+                <li class="service-item">
+                    <img src="https://via.placeholder.com/24" alt="我的行程" class="service-icon">
+                    <span class="service-name">我的行程</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTkgMTguNjY3bC02LTYgMS40MTQtMS40MTQgNC41ODcgNC41ODYgOS41ODctOS41ODYgMS40MTQgMS40MTQtMTEgMTF6Ii8+PC9zdmc+" class="arrow-icon">
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 版本信息 -->
+        <div class="version-info">
+            韵动 v2.7.3
+        </div>
+    </div>
+</body>
+</html>
