@@ -1,0 +1,73 @@
+/* *top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15rpx;
+    background: white;
+    box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+} */
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 5rpx;
+    font-size: 14rpx;
+}
+
+.weather-icon {
+    width: 20rpx;
+    height: 20rpx;
+}
+
+.main-content {
+    padding: 15rpx;
+}
+
+.section-title {
+    font-size: 18rpx;
+    font-weight: bold;
+    margin: 15rpx 0;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15rpx;
+}
+
+.activity-item {
+    background: white;
+    border-radius: 8rpx;
+    padding: 15rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.status {
+    position: absolute;
+    top: 15rpx;
+    right: 15rpx;
+    color: #ff6347;
+    font-size: 14rpx;
+}
+
+.activity-name {
+    font-size: 16rpx;
+    font-weight: bold;
+    margin-bottom: 8rpx;
+}
+
+.activity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5rpx;
+    font-size: 14rpx;
+    color: #666;
+}
+
+.activity-price {
+    margin-top: 10rpx;
+    font-size: 16rpx;
+    color: #ff6347;
+    font-weight: bold;
+}

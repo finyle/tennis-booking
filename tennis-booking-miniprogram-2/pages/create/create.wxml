@@ -1,0 +1,41 @@
+<create.wxml>
+<view class="container">
+    <view class="header">
+        <text class="title">发起约球</text>
+    </view>
+    <form bindsubmit="onSubmit" class="booking-form">
+        <view class="input-group">
+            <label for="activityTitle">活动标题</label>
+            <input type="text" id="activityTitle" placeholder="请输入活动标题" required />
+        </view>
+        <view class="input-group">
+            <label for="meetingPlace">集合地点</label>
+            <input type="text" id="meetingPlace" placeholder="请输入集合地点" required />
+        </view>
+        <view class="input-group">
+            <label for="activityTime">活动时间</label>
+            <input type="datetime-local" id="activityTime" required />
+        </view>
+        <view class="input-group">
+            <label for="recruitNumber">招募人数</label>
+            <input type="number" id="recruitNumber" min="1" placeholder="请输入招募人数" required />
+        </view>
+        <view class="input-group">
+            <label for="activityPrice">活动价格</label>
+            <input type="number" id="activityPrice" step="0.01" placeholder="请填写每人多少钱" required />
+        </view>
+        <view class="input-group">
+            <label for="levelRequirement">级别要求</label>
+            <picker mode="selector" range="{{levelOptions}}" bindchange="onLevelChange">
+                <view class="picker">
+                    {{selectedLevel}}
+                </view>
+            </picker>
+        </view>
+        <button formType="submit" class="submit-btn">确定发布</button>
+    </form>
+    <view class="note">
+        注意：开始前4小时未达到最低人数，活动自动取消；约球结束2天后，报名费自动转入[钱包-余额]中。
+    </view>
+</view>
+</create.wxml>

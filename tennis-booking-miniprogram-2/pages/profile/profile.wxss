@@ -1,0 +1,86 @@
+.container {
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border-radius: 8px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.user-text h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.user-text p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.service-section {
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.section-title {
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.service-list {
+    list-style: none;
+}
+
+.service-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.service-item:last-child {
+    border-bottom: none;
+}
+
+.service-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.service-name {
+    flex: 1;
+    font-size: 15px;
+}
+
+.arrow-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+.version-info {
+    text-align: center;
+    padding: 20px 0;
+    color: #999;
+    font-size: 13px;
+}

@@ -482,6 +482,17 @@
         // 创建约球表单提交
         function confirmAndSubmit() {
             alert('活动已发布！（模拟）');
+            document.getElementsByClassName('activity-list').item(0).innerHTML += `
+                <div class="activity-item">
+                    <div class="status">报名中</div>
+                    <div class="activity-name">${document.getElementById('activityTitle').value}</div>
+                    <div class="activity-info">
+                        <div>${document.getElementById('activityTime').value}</div>
+                        <div>${document.getElementById('meetingPlace').value} 距您1km</div>
+                        <div>已报名1人 | 差${document.getElementById('recruitNumber').value - 1}人</div>
+                    </div>
+                    <div class="activity-price">￥${document.getElementById('activityPrice').value}</div>
+                </div>`;
             showPage('index');
         }
     </script>

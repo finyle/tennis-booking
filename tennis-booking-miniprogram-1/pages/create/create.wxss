@@ -1,0 +1,20 @@
+/tennis-booking
+    ├── /pages
+    │   ├── index
+    │   │   ├── index.wxml
+    │   │   ├── index.wxss
+    │   │   ├── index.js
+    │   │   └── index.json
+    │   ├── create
+    │   │   ├── create.wxml
+    │   │   ├── create.wxss
+    │   │   ├── create.js
+    │   │   └── create.json
+    │   └── profile
+    │       ├── profile.wxml
+    │       ├── profile.wxss
+    │       ├── profile.js
+    │       └── profile.json
+    ├── app.js
+    ├── app.json
+    └── app.wxss

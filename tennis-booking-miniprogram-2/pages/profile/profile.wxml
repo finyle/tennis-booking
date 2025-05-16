@@ -1,0 +1,52 @@
+<profile.wxml>
+<view class="container">
+    <view class="user-info">
+        <image src="https://placeholder.com/150" class="avatar" mode="aspectFill"></image>
+        <view class="user-text">
+            <text class="user-name">林克</text>
+            <text class="user-status">已在韵动吧2天</text>
+        </view>
+    </view>
+
+    <view class="quick-actions">
+        <view class="action-item">
+            <image src="https://via.placeholder.com/30" class="action-icon"></image>
+            <text class="action-text">我的报名</text>
+        </view>
+        <view class="action-item">
+            <image src="https://via.placeholder.com/30" class="action-icon"></image>
+            <text class="action-text">我的约球</text>
+        </view>
+    </view>
+
+    <view class="service-section">
+        <view class="section-title">更多服务</view>
+        <view class="service-list">
+            <view class="service-item">
+                <image src="https://via.placeholder.com/24" class="service-icon"></image>
+                <text class="service-name">球友印象</text>
+            </view>
+            <view class="service-item">
+                <image src="https://via.placeholder.com/24" class="service-icon"></image>
+                <text class="service-name">我的关注</text>
+            </view>
+            <view class="service-item">
+                <image src="https://via.placeholder.com/24" class="service-icon"></image>
+                <text class="service-name">约球协议</text>
+            </view>
+            <view class="service-item">
+                <image src="https://via.placeholder.com/24" class="service-icon"></image>
+                <text class="service-name">约球余额</text>
+            </view>
+            <view class="service-item">
+                <image src="https://via.placeholder.com/24" class="service-icon"></image>
+                <text class="service-name">我的行程</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="version-info">
+        韵动 v2.7.3
+    </view>
+</view>
+</profile.wxml>

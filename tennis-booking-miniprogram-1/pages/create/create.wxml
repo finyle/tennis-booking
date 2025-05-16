@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/create/create",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarTitleText": "网球约球"
+  }
+}

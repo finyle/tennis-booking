@@ -1,0 +1,35 @@
+<view class="page-index">
+    <view class="top-bar">
+        <text class="title">网球约球</text>
+        <view class="weather-info">
+            <image src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE4LjVDMTIuODMsMTguNSAxMy41LDE3LjgzIDEzLjUsMTdDMTMuNSwxNi4xNyAxMi44MywxNS41IDEyLDE1LjVDMTEuMTcsMTUuNSAxMC41LDE2LjE3IDEwLjUsMTdDMTAuNSwxNy44MyAxMS4xNywxOC41IDEyLDE4LjVNMjAsMTIuNUMyMCwxNC4xOCAxOC45LDE1LjUgMTcuNSwxNS41QzE2LjE1LDE1LjUgMTUsMTQuMTggMTUsMTIuNUMxNSwxMC44MiAxNi4xLDkuNSAxNy41LDkuNUMxOC44OSw5LjUgMjAsMTAuODIgMjAsMTIuNU0xNiwxMkMxNiwxMy42NiAxNC42NiwxNSAxMywxNUMxMS4zNCwxNSAxMCwxMy42NiAxMCwxMkMxMCwxMC4zNCAxMS4zNCw5IDEzLDlDMTQuNjYsOSAxNiwxMC4zNCAxNiwxMk0xOSwxMkMxOSw4LjEzIDE1Ljg3LDUgMTIsNUM4LjEzLDUgNSw4LjEzIDUsMTJDNSwxNS44NyA4LjEzLDE5IDEyLDE5QzE1Ljg3LDE5IDE5LDE1Ljg3IDE5LDEyTTEyLDMuNUMxMi4yOCwzLjUgMTIuNSwzLjcyIDEyLjUsNFY2LjVDMTIuNSw2Ljc4IDEyLjI4LDcgMTIsN0MxMS43Miw3IDExLjUsNi43OCAxMS41LDYuNVY0QzExLjUsMy43MiAxMS43MiwzLjUgMTIsMy41TTE3LjUsMTBDMTcuMjIsMTAgMTcsMTAuMjIgMTcsMTAuNVYxMkMxNywxMi4yOCAxNy4yMiwxMi41IDE3LjUsMTIuNUMxNy43OCwxMi41IDE4LDEyLjI4IDE4LDEyVjEwLjVDMTgsMTAuMjIgMTcuNzgsMTAgMTcuNSwxME0xNy41LDYuNUMxNy43OCw2LjUgMTgsNi4yOCAxOCw2VjQuNUMxOCw0LjIyIDE3Ljc4LDQgMTcuNSw0QzE3LjIyLDQgMTcsNC4yMiAxNyw0LjVWNkMxNyw2LjI4IDE3LjIyLDYuNSAxNy41LDYuNU02LjUsMTBDNi4yMiwxMCA2LDEwLjIyIDYsMTAuNVYxMkM2LDEyLjI4IDYuMjIsMTIuNSA2LjUsMTIuNUM2Ljc4LDEyLjUgNywxMi4yOCA3LDEyVjEwLjVDNywxMC4yMiA2Ljc4LDEwIDYuNSwxME02LjUsNi41QzYuNzgsNi41IDcsNi4yOCA3LDZWNC41QzcsNC4yMiA2Ljc4LDQgNi41LDRDNi4yMiw0IDYsNC4yMiA2LDQuNVY2QzYsNi4yOCA2LjIyLDYuNSA2LjUsNi41WiIgZmlsbD0iIzA3YzE2MCIvPjwvc3ZnPg==" class="weather-icon" alt="天气"/>
+            <text>晴 25°C</text>
+        </view>
+        <view class="date" id="index-date"></view>
+    </view>
+    <view class="main-content">
+        <view class="section-title">热门约球畅打活动</view>
+        <view class="activity-list">
+            <view class="activity-item">
+                <view class="status">报名中</view>
+                <view class="activity-name">网球陪练4.0</view>
+                <view class="activity-info">
+                    <view>5月15日 07:00-23:22</view>
+                    <view>静安寺 距您1km</view>
+                    <view>已报名3人 | 差2人</view>
+                </view>
+                <view class="activity-price">￥120.00</view>
+            </view>
+            <view class="activity-item">
+                <view class="status">报名中</view>
+                <view class="activity-name">跃网·Rising大华室内网球畅打活动</view>
+                <view class="activity-info">
+                    <view>5月15日 10:00-19:00</view>
+                    <view>大华 距您3.1km</view>
+                    <view>已报名5人 | 差3人</view>
+                </view>
+                <view class="activity-price">￥150.00</view>
+            </view>
+        </view>
+    </view>
+</view>
